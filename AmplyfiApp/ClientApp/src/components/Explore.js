@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import Progress from './Progress';
 
-export class FetchData extends Component {
-  static displayName = FetchData.name;
+export class Explore extends Component {
+  static displayName = Explore.name;
 
   constructor (props) {
     super(props);
@@ -35,8 +36,8 @@ export class FetchData extends Component {
 
   render () {
     let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchData.renderSampleDataTable(this.state.sampleData);
+      ? <Progress />
+      : Explore.renderSampleDataTable(this.state.sampleData);
 
     return (
       <div>
