@@ -8,7 +8,8 @@ namespace AmplyfiApp.Models
         public string Title { get; set; }
         public int Year { get; set; }
         public string Summary { get; set; }
-        public string Geol { get; set; }
+        public string Body { get; set; }
+        public string Geo1 { get; set; }
         public string SourceType { get; set; }
         public string SrcUrl { get; set; }
         public List<string> Places { get; set; }

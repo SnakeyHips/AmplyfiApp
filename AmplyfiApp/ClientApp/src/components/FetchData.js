@@ -5,33 +5,27 @@ export class FetchData extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { forecasts: [], loading: true };
+    this.state = { sampleData: [], loading: true };
 
-    fetch('api/SampleData/WeatherForecasts')
+      fetch('api/SampleData/GetSampleDataTitles')
       .then(response => response.json())
       .then(data => {
-        this.setState({ forecasts: data, loading: false });
+        this.setState({ sampleData: data, loading: false });
       });
   }
 
-  static renderForecastsTable (forecasts) {
+  static renderSampleDataTable (sampleData) {
     return (
       <table className='table table-striped'>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Title</th>
           </tr>
         </thead>
         <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.dateFormatted}>
-              <td>{forecast.dateFormatted}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
+          {sampleData.map(sampleItem =>
+            <tr key={sampleItem}>
+              <td>{sampleItem}</td>
             </tr>
           )}
         </tbody>
@@ -42,11 +36,11 @@ export class FetchData extends Component {
   render () {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
+      : FetchData.renderSampleDataTable(this.state.sampleData);
 
     return (
       <div>
-        <h1>Weather forecast</h1>
+        <h1>Sample Data</h1>
         <p>This component demonstrates fetching data from the server.</p>
         {contents}
       </div>

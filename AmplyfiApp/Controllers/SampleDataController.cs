@@ -24,7 +24,7 @@ namespace AmplyfiApp.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<string> LoadSampleDataTitles()
+        public IEnumerable<string> GetSampleDataTitles()
         {
             return SampleDataViewModel.SampleData.Select(x => x.Title).ToList();
         }
