@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import Drawer from '@material-ui/core/Drawer';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -32,6 +39,13 @@ const styles = theme => ({
     width: drawerWidth,
     background: "#212121"
   },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: -36,
+  },
+  hide: {
+    display: 'none',
+  },
   list: {
       padding: 0
   },
@@ -45,7 +59,8 @@ const styles = theme => ({
 class Main extends Component {
     constructor (props) {
         super(props);
-        this.state = { 
+        this.state = {
+          open: false,
           selectedIndex: 0,
           selectedItem: [],
           loading: true
@@ -56,8 +71,14 @@ class Main extends Component {
         if(!this.props.loading) this.fetchItem();
     }
 
+    toggleDrawer = (open) => () => {
+        this.setState({
+          open: open,
+        });
+      };
+
     handleListItemClick = (event, index) => {
-        this.setState({ selectedIndex: index, loading: true }, () => {
+        this.setState({ open: false, selectedIndex: index, loading: true }, () => {
             this.fetchItem()
         })
     };
@@ -78,19 +99,16 @@ class Main extends Component {
       : <Info selectedItem={this.state.selectedItem}/>
     ;
 
-    return (
-        <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
-            <Grid container justify="center">
-            <Typography variant="h6" color="secondary" noWrap>
-                AmplyfiApp
-            </Typography>
-            </Grid>
-            </Toolbar>
-        </AppBar>
-        <Drawer
+    let nav = <List className ={classes.list}>
+        {this.props.sampleData.map((item, i) =>
+            <ListItem key={i} button selected={this.state.selectedIndex === i} onClick={event => this.handleListItemClick(event, i)}>
+            <ListItemText>{item}</ListItemText>
+            </ListItem>
+        )}
+    </List>;
+
+    let drawer = isWidthUp('sm', this.props.width)
+        ? <Drawer
             className={classes.drawer}
             variant="permanent"
             classes={{
@@ -98,14 +116,41 @@ class Main extends Component {
             }}
         >
             <div className={classes.toolbar} />
-            <List className ={classes.list}>
-                {this.props.sampleData.map((item, i) =>
-                    <ListItem key={i} button selected={this.state.selectedIndex === i} onClick={event => this.handleListItemClick(event, i)}>
-                    <ListItemText>{item}</ListItemText>
-                    </ListItem>
-                )}
-            </List>
+            {nav}
         </Drawer>
+        : <SwipeableDrawer
+            anchor="left"
+            open={this.state.open}
+            onClose={this.toggleDrawer(false)}
+            onOpen={this.toggleDrawer(true)}
+        >
+            {nav}
+        </SwipeableDrawer>
+    ;
+
+    return (
+        <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+            <Hidden smUp>
+                <IconButton
+                    color="secondary" 
+                    aria-label="Open drawer"
+                    onClick={this.toggleDrawer(true)}
+                    className={classNames(classes.menuButton, this.state.open && classes.hide)}
+                >
+                    <MenuIcon />
+                </IconButton>
+            </Hidden>
+            <Grid container justify="center">
+            <Typography variant="h6" color="secondary" noWrap>
+                AmplyfiApp
+            </Typography>
+            </Grid>
+            </Toolbar>
+        </AppBar>
+        {drawer}
         <main className={classes.content}>
             <div className={classes.toolbar} />
             {contents}
@@ -119,4 +164,7 @@ Main.propTypes = {
     classes: PropTypes.object.isRequired,
 };
   
-export default withStyles(styles)(Main);
+export default compose(
+    withStyles(styles),
+    withWidth(),
+)(Main);
