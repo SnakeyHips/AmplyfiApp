@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import Progress from './Progress';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export class Explore extends Component {
   static displayName = Explore.name;
 
   constructor (props) {
     super(props);
-    this.state = { sampleData: [], loading: true };
+    this.state = { 
+      sampleData: [], 
+      selectedIndex: 0, 
+      loading: true
+     };
 
       fetch('api/SampleData/GetSampleDataTitles')
       .then(response => response.json())
@@ -15,22 +24,24 @@ export class Explore extends Component {
       });
   }
 
+  handleListItemClick = (event, index) => {
+    this.setState({ selectedIndex: index });
+  };
+
   static renderSampleDataTable (sampleData) {
+    const { classes } = this.props;
+
     return (
-      <table className='table table-striped'>
-        <thead>
-          <tr>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sampleData.map(sampleItem =>
-            <tr key={sampleItem}>
-              <td>{sampleItem}</td>
-            </tr>
+      <Drawer
+        variant="permanent" className={classes.drawerPaper}>
+        <List component="nav">
+          {sampleData.map((sampleItem, i) =>
+            <ListItem key={i} button selected={this.state.selectedIndex === i} onClick={event => this.handleListItemClick(event, i)}>
+              <ListItemText>{sampleItem}</ListItemText>
+            </ListItem>
           )}
-        </tbody>
-      </table>
+        </List>
+      </Drawer>
     );
   }
 
@@ -41,9 +52,8 @@ export class Explore extends Component {
 
     return (
       <div>
-        <h1>Sample Data</h1>
-        <p>This component demonstrates fetching data from the server.</p>
         {contents}
+
       </div>
     );
   }
