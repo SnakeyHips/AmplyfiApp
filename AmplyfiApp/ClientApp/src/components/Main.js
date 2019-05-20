@@ -17,6 +17,7 @@ import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Fade from '@material-ui/core/Fade';
 import Progress from './Progress';
 import Info from './Info';
 
@@ -28,7 +29,6 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    border: '1px #',
     boxShadow: 'unset'
   },
   drawer: {
@@ -107,7 +107,7 @@ class Main extends Component {
         )}
     </List>;
 
-    let drawer = isWidthUp('sm', this.props.width)
+    let drawer = isWidthUp('md', this.props.width)
         ? <Drawer
             className={classes.drawer}
             variant="permanent"
@@ -129,33 +129,35 @@ class Main extends Component {
     ;
 
     return (
-        <div className={classes.root}>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
-            <Hidden smUp>
-                <IconButton
-                    color="secondary" 
-                    aria-label="Open drawer"
-                    onClick={this.toggleDrawer(true)}
-                    className={classNames(classes.menuButton, this.state.open && classes.hide)}
-                >
-                    <MenuIcon />
-                </IconButton>
-            </Hidden>
-            <Grid container justify="center">
-            <Typography variant="h6" color="secondary" noWrap>
-                AmplyfiApp
-            </Typography>
-            </Grid>
-            </Toolbar>
-        </AppBar>
-        {drawer}
-        <main className={classes.content}>
-            <div className={classes.toolbar} />
-            {contents}
-        </main>
-        </div>
+        <Fade in={true}>
+            <div className={classes.root}>
+            <CssBaseline />
+            <AppBar position="fixed" className={classes.appBar}>
+                <Toolbar>
+                <Hidden mdUp>
+                    <IconButton
+                        color="secondary" 
+                        aria-label="Open drawer"
+                        onClick={this.toggleDrawer(true)}
+                        className={classNames(classes.menuButton, this.state.open && classes.hide)}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                </Hidden>
+                <Grid container justify="center">
+                <Typography variant="h6" color="secondary" noWrap>
+                    AmplyfiApp
+                </Typography>
+                </Grid>
+                </Toolbar>
+            </AppBar>
+            {drawer}
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                    {contents}
+            </main>
+            </div>
+        </Fade>
     );
 }
 }
