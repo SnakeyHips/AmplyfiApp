@@ -11,7 +11,10 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#FFC107'
-    }
+    },
+    typography: {
+      useNextVariants: true,
+    },
   }
 });
 

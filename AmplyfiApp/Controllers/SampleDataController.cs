@@ -18,7 +18,7 @@ namespace AmplyfiApp.Controllers
         }
 
         [HttpGet("[action]")]
-        public SampleDataClass GetSampleData(int id)
+        public SampleDataClass GetSampleDataItem(int id)
         {
             return SampleDataViewModel.SampleData.FirstOrDefault(x => x.ID == id);
         }
