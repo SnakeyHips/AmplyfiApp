@@ -12,6 +12,10 @@ const theme = createMuiTheme({
     secondary: {
       main: '#FFC107'
     },
+    background: {
+      default: "#424242"
+    },
+    type: "dark",
     typography: {
       useNextVariants: true,
     },

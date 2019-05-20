@@ -5,6 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,13 +21,19 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    border: '1px #',
+    boxShadow: 'unset'
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
+    flexShrink: 0
   },
   drawerPaper: {
     width: drawerWidth,
+    background: "#212121"
+  },
+  list: {
+      padding: 0
   },
   content: {
     flexGrow: 1,
@@ -50,7 +57,7 @@ class Main extends Component {
     }
 
     handleListItemClick = (event, index) => {
-        this.setState({ selectedIndex: index }, () => {
+        this.setState({ selectedIndex: index, loading: true }, () => {
             this.fetchItem()
         })
     };
@@ -76,9 +83,11 @@ class Main extends Component {
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
+            <Grid container justify="center">
             <Typography variant="h6" color="secondary" noWrap>
-                Clipped drawer
+                AmplyfiApp
             </Typography>
+            </Grid>
             </Toolbar>
         </AppBar>
         <Drawer
