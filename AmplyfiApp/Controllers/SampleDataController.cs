@@ -18,15 +18,15 @@ namespace AmplyfiApp.Controllers
         }
 
         [HttpGet("[action]")]
-        public SampleDataClass GetSampleData(string title)
+        public SampleDataClass GetSampleData(int id)
         {
-            return SampleDataViewModel.SampleData.FirstOrDefault(x => x.Title.Equals(title));
+            return SampleDataViewModel.SampleData.FirstOrDefault(x => x.ID == id);
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<string> GetSampleDataTitles()
+        public IEnumerable<int> GetSampleDataIds()
         {
-            return SampleDataViewModel.SampleData.Select(x => x.Title).ToList();
+            return SampleDataViewModel.SampleData.OrderBy(x => x.ID).Select(x => x.ID).ToList();
         }
     }
 }

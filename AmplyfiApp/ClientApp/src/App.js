@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route } from 'react-router';
-import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { Explore } from './components/Explore';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -12,24 +11,19 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#FFC107'
-    },
-    typography: {
-      useNextVariants: true,
     }
   }
 });
 
 export default class App extends Component {
-  static displayName = App.name;
-
   render () {
     return (
-      <MuiThemeProvider theme={theme}>
-        <Layout>
-          <Route exact path='/' component={Home} />
-          <Route path='/explore' component={Explore} />
-        </Layout>
-      </MuiThemeProvider>
+      <React.Fragment>
+        <CssBaseline />
+        <MuiThemeProvider theme={theme}>
+              <Route path='/' component={ Home } />
+        </MuiThemeProvider>
+      </React.Fragment>
     );
   }
 }
