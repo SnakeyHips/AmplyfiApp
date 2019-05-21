@@ -12,7 +12,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +24,11 @@
   <ItemGroup>
     <Content Include="ClientApp\src\assets\countries.json" />
     <Content Include="ClientApp\src\assets\world-110m.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AmplyfiApp.Common\AmplyfiApp.Common.csproj" />
+    <ProjectReference Include="..\AmplyfiApp.Contracts\AmplyfiApp.Contracts.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

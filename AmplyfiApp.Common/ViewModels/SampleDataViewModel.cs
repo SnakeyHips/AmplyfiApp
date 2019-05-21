@@ -1,26 +1,28 @@
-﻿using AmplyfiApp.Models;
+﻿using AmplyfiApp.Contracts.Models;
+using AmplyfiApp.Contracts.ViewModels;
+using AmplyfiApp.Common.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace AmplyfiApp.ViewModels
+namespace AmplyfiApp.Common.ViewModels
 {
-    public class SampleDataViewModel
+    public class SampleDataViewModel : ISampleDataViewModel
     {
         public SampleDataViewModel()
         {
             SampleData = LoadSampleData();
         }
 
-        public List<SampleDataClass> SampleData { get; set; }
+        public List<ISampleDataClass> SampleData { get; set; }
 
         public List<string> SampleDataTitles { get; set; }
 
-        public List<SampleDataClass> LoadSampleData()
+        public List<ISampleDataClass> LoadSampleData()
         {
-            List<SampleDataClass> temp = new List<SampleDataClass>();
+            List<ISampleDataClass> temp = new List<ISampleDataClass>();
             foreach (string file in Directory.EnumerateFiles(Path.Combine(Environment.CurrentDirectory, "Assets")))
             {
                 JObject jObject = JObject.Parse(File.ReadAllText(file));

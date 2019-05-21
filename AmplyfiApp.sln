@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmplyfiApp", "AmplyfiApp\AmplyfiApp.csproj", "{35317EB7-4C07-4721-B35B-D999FF393352}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmplyfiApp", "AmplyfiApp\AmplyfiApp.csproj", "{35317EB7-4C07-4721-B35B-D999FF393352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmplyfiApp.Common", "AmplyfiApp.Common\AmplyfiApp.Common.csproj", "{D8A05F56-061A-444F-8639-9CA46071C1CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmplyfiApp.Contracts", "AmplyfiApp.Contracts\AmplyfiApp.Contracts.csproj", "{0BB47526-8BAC-47D4-BB48-12822CD024CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{35317EB7-4C07-4721-B35B-D999FF393352}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35317EB7-4C07-4721-B35B-D999FF393352}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35317EB7-4C07-4721-B35B-D999FF393352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A05F56-061A-444F-8639-9CA46071C1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A05F56-061A-444F-8639-9CA46071C1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A05F56-061A-444F-8639-9CA46071C1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A05F56-061A-444F-8639-9CA46071C1CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BB47526-8BAC-47D4-BB48-12822CD024CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BB47526-8BAC-47D4-BB48-12822CD024CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BB47526-8BAC-47D4-BB48-12822CD024CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BB47526-8BAC-47D4-BB48-12822CD024CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

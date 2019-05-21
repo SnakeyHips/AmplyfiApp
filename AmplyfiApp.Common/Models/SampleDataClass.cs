@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using AmplyfiApp.Contracts.Models;
+using System.Collections.Generic;
 
-namespace AmplyfiApp.Models
+namespace AmplyfiApp.Common.Models
 {
-    public class SampleDataClass
+    public class SampleDataClass : ISampleDataClass
     {
         public int ID { get; set; }
         public string Title { get; set; }
