@@ -13,7 +13,7 @@ namespace AmplyfiApp.Common.Models
         public string Geo1 { get; set; }
         public string SourceType { get; set; }
         public string SrcUrl { get; set; }
-        public List<string> Places { get; set; }
+        public List<ICountry> Countries { get; set; }
         public List<string> People { get; set; }
         public List<string> Companies { get; set; }
         public List<string> BiGrams { get; set; }

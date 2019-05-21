@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { geoMercator, geoPath } from "d3-geo";
 import { feature } from "topojson-client";
 import worldData from '../assets/world-110m.json';
-import countries from '../assets/countries.json';
 
 class MapChart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      worldData: []
+      worldData: [],
     }
   }
-
-  filteredCountries = this.filterCountries();
 
   projection() {
     return geoMercator()
@@ -26,21 +23,6 @@ class MapChart extends Component {
         worldData: feature(worldData, worldData.objects.countries).features
       })
     }
-  }
-
-  filterCountries() {
-    var temp = [];
-    for(var i = 0; i < this.props.places.length; i++) {
-      for(var j = 0; j < countries.length; j++) {
-        if(countries[j].name === this.props.places[i] || countries[j].capital === this.props.places[i]){
-          var swapLatLng = [countries[j].latlng[1], countries[j].latlng[0]];
-          countries[j].latlng = swapLatLng;
-          temp.push(countries[j]);
-          break;
-        }
-      }
-    }
-    return temp;
   }
 
   render() {
@@ -62,11 +44,11 @@ class MapChart extends Component {
         </g>
         <g className="markers">
           {
-           this.filteredCountries.map((country, i) => (
+           this.props.countries.map((country, i) => (
               <circle
                 key={ `marker-${i}` }
-                cx={ this.projection()(country.latlng)[0] }
-                cy={ this.projection()(country.latlng)[1] }
+                cx={ this.projection()(country.coordinates)[0] }
+                cy={ this.projection()(country.coordinates)[1] }
                 r={5}
                 fill="#FFC107"
                 className="marker"

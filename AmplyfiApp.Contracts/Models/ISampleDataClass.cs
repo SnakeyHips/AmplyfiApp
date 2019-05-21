@@ -12,7 +12,7 @@ namespace AmplyfiApp.Contracts.Models
         string Geo1 { get; }
         string SourceType { get; }
         string SrcUrl { get; }
-        List<string> Places { get; }
+        List<ICountry> Countries { get; }
         List<string> People { get; }
         List<string> Companies { get; }
         List<string> BiGrams { get; }

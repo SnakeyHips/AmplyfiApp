@@ -59,8 +59,13 @@ class Info extends Component {
                         {this.props.selectedItem.body}
                     </Typography>
                 </Grid>
-                    <Grid item xs={12}>
-                <MapChart places={this.props.selectedItem.places}/>
+                <Grid item xs={12}>
+                    <Typography variant="h4" color="secondary">
+                        Places
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <MapChart countries={this.props.selectedItem.countries}/>
                 </Grid>
             </Grid>
         </Fade>

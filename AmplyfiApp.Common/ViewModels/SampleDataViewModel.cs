@@ -13,6 +13,7 @@ namespace AmplyfiApp.Common.ViewModels
     {
         public SampleDataViewModel()
         {
+            SampleDataCountries = LoadCountries();
             SampleData = LoadSampleData();
         }
 
@@ -20,10 +21,12 @@ namespace AmplyfiApp.Common.ViewModels
 
         public List<string> SampleDataTitles { get; set; }
 
+        public List<ICountry> SampleDataCountries { get; set; }
+
         public List<ISampleDataClass> LoadSampleData()
         {
             List<ISampleDataClass> temp = new List<ISampleDataClass>();
-            foreach (string file in Directory.EnumerateFiles(Path.Combine(Environment.CurrentDirectory, "Assets")))
+            foreach (string file in Directory.EnumerateFiles(Path.Combine(Environment.CurrentDirectory, "Assets/Data")))
             {
                 JObject jObject = JObject.Parse(File.ReadAllText(file));
                 temp.Add(new SampleDataClass()
@@ -36,7 +39,7 @@ namespace AmplyfiApp.Common.ViewModels
                     Geo1 = jObject["m_szGeo1"].ToString(),
                     SourceType = jObject["m_szSourceType"].ToString(),
                     SrcUrl = jObject["m_szSrcUrl"].ToString(),
-                    Places = jObject["m_Places"].Children().ToList().Select(x => x.ToString()).ToList(),
+                    Countries = GetFilteredCountries(jObject["m_Places"].Children().ToList().Select(x => x.ToString()).ToList()),
                     People = jObject["m_People"].Children().ToList().Select(x => x.ToString()).ToList(),
                     Companies = jObject["m_Companies"].Children().ToList().Select(x => x.ToString()).ToList(),
                     BiGrams = jObject["m_BiGrams"].Children().ToList().Select(x => x.ToString()).ToList(),
@@ -49,6 +52,38 @@ namespace AmplyfiApp.Common.ViewModels
                     TriCnt = jObject["m_TriCnt"].Children().ToList().Select(x => int.Parse(x.ToString())).ToList(),
                     BodyWordCnt = int.Parse(jObject["m_iDocBodyWordCnt"].ToString()),
                 });
+            }
+            return temp;
+        }
+
+        public List<ICountry> LoadCountries()
+        {
+            List<ICountry> temp = new List<ICountry>();
+            using (StreamReader sr = new StreamReader(Path.Combine(Environment.CurrentDirectory, "Assets/countries.json")))
+            {
+                JArray jArray = JArray.Parse(sr.ReadToEnd());
+                foreach(JObject jObject in jArray)
+                {
+                    temp.Add(new Country()
+                    {
+                        Name = jObject["name"].ToString(),
+                        Capital = jObject["capital"].ToString() ?? "",
+                        Coordinates = new double[] { double.Parse(jObject["latlng"][1].ToString()), double.Parse(jObject["latlng"][0].ToString()) }
+                });
+                }
+            }
+            return temp;
+        }
+
+        public List<ICountry> GetFilteredCountries(List<string> places)
+        {
+            List<ICountry> temp = new List<ICountry>();
+            foreach (string place in places)
+            {
+                foreach(ICountry country in SampleDataCountries)
+                {
+                    if (country.Name.Equals(place) || country.Capital.Equals(place)) temp.Add(country);
+                }
             }
             return temp;
         }

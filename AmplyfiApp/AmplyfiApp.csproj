@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="ClientApp\src\assets\countries.json" />
     <Content Include="ClientApp\src\assets\world-110m.json" />
   </ItemGroup>
 
