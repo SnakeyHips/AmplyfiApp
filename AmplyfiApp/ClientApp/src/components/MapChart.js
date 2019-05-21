@@ -27,7 +27,7 @@ class MapChart extends Component {
 
   render() {
     return (
-      <svg width="100%" height="100%" viewBox="0 0 800 450">
+      <svg width="100%" height="90%" viewBox="0 0 800 350">
         <g className="countries">
           {
             this.state.worldData.map((d,i) => (
