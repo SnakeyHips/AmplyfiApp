@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Route } from 'react-router';
 import { Home } from './components/Home';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import './App.css';
 
 const theme = createMuiTheme({
   palette: {
@@ -25,12 +26,10 @@ const theme = createMuiTheme({
 export default class App extends Component {
   render () {
     return (
-      <React.Fragment>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <MuiThemeProvider theme={theme}>
-              <Route path='/' component={ Home } />
-        </MuiThemeProvider>
-      </React.Fragment>
+        <Route path='/' component={ Home } />
+      </MuiThemeProvider>
     );
   }
 }

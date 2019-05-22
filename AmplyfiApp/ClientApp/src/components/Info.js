@@ -148,7 +148,7 @@ class Info extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                <MapChart countries={this.props.selectedItem.countries}/>
+                  <MapChart countries={this.props.selectedItem.countries}/>
               </Grid>
             </Grid>
           </div>
