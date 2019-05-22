@@ -41,10 +41,12 @@ const styles = theme => ({
     background: "#212121"
   },
   menuButton: {
-    marginLeft: -12
+    marginLeft: -12,
+    marginRight: -36
   },
   githubButton: {
-    marginRight: -12
+    marginRight: -12,
+    marginLeft: -36
   },
   hide: {
     display: 'none',
