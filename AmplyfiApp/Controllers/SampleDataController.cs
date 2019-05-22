@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using AmplyfiApp.Contracts.Models;
 using AmplyfiApp.Contracts.ViewModels;
 using AmplyfiApp.Common.ViewModels;
@@ -18,15 +19,23 @@ namespace AmplyfiApp.Controllers
         }
 
         [HttpGet("[action]")]
-        public ISampleDataClass GetSampleDataItem(int id)
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public ActionResult<ISampleDataClass> GetSampleDataItem(int id)
         {
-            return this.sampleDataViewModel.SampleData.FirstOrDefault(x => x.ID == id);
+            return new JsonResult(this.sampleDataViewModel.SampleData.FirstOrDefault(x => x.ID == id));
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<int> GetSampleDataIds()
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public ActionResult<IEnumerable<int>> GetSampleDataIds()
         {
-            return this.sampleDataViewModel.SampleData.OrderBy(x => x.ID).Select(x => x.ID).ToList();
+            return new JsonResult(this.sampleDataViewModel.SampleData.OrderBy(x => x.ID).Select(x => x.ID).ToList());
         }
     }
 }

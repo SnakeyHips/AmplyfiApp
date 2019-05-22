@@ -12,10 +12,18 @@ export class Home extends Component {
      };
 
     fetch('api/SampleData/GetSampleDataIds')
-      .then(response => response.json())
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Network response was not ok: ' + response.status)
+        }
+      })
       .then(data => {
         this.setState({ sampleData: data, loading: false });
-    });
+      }).catch(error => {
+        console.log(error.message);
+      });
   }
 
   render () {

@@ -88,10 +88,18 @@ class Main extends Component {
 
   fetchItem() {
     fetch('api/SampleData/GetSampleDataItem?id=' + this.props.sampleData[this.state.selectedIndex])
-    .then(response => response.json())
-    .then(data => {
-      this.setState({ selectedItem: data, loading: false });
-    }); 
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Network response was not ok: ' + response.status)
+        }
+      })
+      .then(data => {
+        this.setState({ selectedItem: data, loading: false });
+      }).catch(error => {
+        console.log(error.message);
+      }); 
   }  
 
   render () {
