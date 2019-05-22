@@ -7,7 +7,7 @@ class MapChart extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      worldData: [],
+      worldData: feature(worldData, worldData.objects.countries).features
     }
   }
 
@@ -15,14 +15,6 @@ class MapChart extends Component {
     return geoMercator()
       .scale(100)
       .translate([ 800 / 2, 450 / 2 ])
-  }
-
-  componentDidMount() {
-    if(!this.props.loading) {
-      this.setState({
-        worldData: feature(worldData, worldData.objects.countries).features
-      })
-    }
   }
 
   render() {

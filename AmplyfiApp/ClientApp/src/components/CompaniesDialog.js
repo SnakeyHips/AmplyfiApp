@@ -3,18 +3,24 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 
 const styles = {
   title: {
     color: '#FFC107',
   },
+  avatar: {
+    color: '#FFC107',
+  },
 };
 
-class BodyDialog extends Component {
+class CompaniesDialog extends Component {
   handleClose = () => {
     this.props.onClose(this.props.selectedValue);
   };
@@ -30,14 +36,23 @@ class BodyDialog extends Component {
         <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
         <DialogTitle id="simple-dialog-title">
           <span className={classes.title}>
-            Body
+            Companies
           </span>
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="simple-dialog-description">
-            {this.props.itembody}
-          </DialogContentText>
-        </DialogContent>
+        <div>
+          <List>
+            {this.props.companies.map(company => (
+              <ListItem key={company}>
+                <ListItemAvatar>
+                  <Avatar className={classes.avatar}>
+                    {company.charAt(0)}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={company} />
+              </ListItem>
+            ))}
+          </List>
+        </div>
         <DialogActions>
           <Button onClick={this.handleClose} color="secondary" autoFocus>
             Close
@@ -48,8 +63,8 @@ class BodyDialog extends Component {
   }
 }
 
-BodyDialog.propTypes = {
+CompaniesDialog.propTypes = {
   onClose: PropTypes.func
 };
 
-export default withStyles(styles)(BodyDialog);
+export default withStyles(styles)(CompaniesDialog);
