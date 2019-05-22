@@ -22,12 +22,12 @@ class BodyDialog extends Component {
   handleListItemClick = value => {
     this.props.onClose(value);
   };
-    
-  render () {
+
+  render() {
     const { classes, onClose, ...other } = this.props;
 
     return (
-        <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
+      <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
         <DialogTitle id="simple-dialog-title">
           <span className={classes.title}>
             Body

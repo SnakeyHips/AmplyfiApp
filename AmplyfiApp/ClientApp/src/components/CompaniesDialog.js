@@ -33,7 +33,7 @@ class CompaniesDialog extends Component {
     const { classes, onClose, ...other } = this.props;
 
     return (
-        <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
+      <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
         <DialogTitle id="simple-dialog-title">
           <span className={classes.title}>
             Companies
@@ -41,8 +41,8 @@ class CompaniesDialog extends Component {
         </DialogTitle>
         <div>
           <List>
-            {this.props.companies.map(company => (
-              <ListItem key={company}>
+            {this.props.companies.map((company, i) => (
+              <ListItem key={ `company-${ i }` }>
                 <ListItemAvatar>
                   <Avatar className={classes.avatar}>
                     {company.charAt(0)}
